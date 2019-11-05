@@ -1,21 +1,30 @@
 #!/bin/bash
-set -ex
+# set -ex
 
 if git rev-parse "$CORE_VERSION_NAME" >/dev/null 2>&1; then
     echo "Tag, $CORE_VERSION_NAME, already exists";
 else
+	cd traveler_core_kit/
+	../gradlew bintrayUpload
+	cd ..
     git tag $CORE_VERSION_NAME
 fi
 
 if git rev-parse "$UI_VERSION_NAME" >/dev/null 2>&1; then
     echo "Tag, $UI_VERSION_NAME, already exists";
 else
+	cd traveler_ui_kit/
+	../gradlew bintrayUpload
+	cd ..
     git tag $UI_VERSION_NAME
 fi
 
 if git rev-parse "$STRIPE_VERSION_NAME" >/dev/null 2>&1; then
     echo "Tag, $STRIPE_VERSION_NAME, already exists";
 else
+	cd traveler_stripe_payment_provider/
+	../gradlew bintrayUpload
+	cd ..
     git tag $STRIPE_VERSION_NAME
 fi
 
